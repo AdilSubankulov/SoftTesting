@@ -1,21 +1,21 @@
 import {test, expect, type Page} from '@playwright/test'
+import { LalafoPage } from '../pages/LalafoPage';
 
-test.describe('Register Organization', ()=> {
+test.describe('Lalafo Organization', ()=> {
     test('Check', async({page}) => {
+        const lalafoPage = new LalafoPage(page)
+
         //Открываем главную страницу сайта
         await page.goto('');
 
-        //Нажимаю на кнопку Войти и Регистрация
-        await page.locator('.LFParagraph.size-16.guest-menu').click();
-        await page.locator('.css-q6bjrz .main-header__user-menu').click();
+        // Нажимаю на кнопку Войти и Регистрация
+        await lalafoPage.openFormAuth()
         
         //Авторизация с уже сущ. пользователем
-         await page.locator('.css-1by14i2 .LFInput__wrapper.with-icon .LFInput__input').click();
-         await page.locator('.css-1by14i2 .LFInput__wrapper.with-icon .LFInput__input').fill('+996771141250');
-         await page.locator('.css-1by14i2 .LFInputPassword__input').click();
-         await page.locator('.css-1by14i2 .LFInputPassword__input').fill('192851');
-         await page.locator('.css-bky1po .login-form__controls').click();
-         await page.locator('..css-bky1po .login-form .LFButton').click();
-         await page.waitForTimeout(6000)
+        await lalafoPage.fillFormAuth()
+
+        //Нажимаю кнопку для подтверждения 
+        await lalafoPage.submitFormAuth()
+        await page.waitForTimeout(6000)
     })
 })
