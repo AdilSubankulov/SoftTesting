@@ -25,3 +25,17 @@
     
 5. **Запуск автотестов:**  
    npx playwright test auth.spec.ts --headers
+
+## API Postman collection
+
+1.**Установка Newman:**
+   - npm install -g newman
+   - npm install -g newman-reporter-htmlextra
+
+2.  **Добавление Newman в проект:**
+   - npm install newman newman-reporter-htmlextra --save-dev
+   - "scripts": {"test:newman": "newman run postman/API-Testing-submit-an-Order.json -r htmlextra --reporter-htmlextra-export ./postman-report.html"}
+
+3.  **Запуск тестов и просмотр HTML-отчета:**
+   - npm run test:newman
+   - Открываю файл postman-report.html в браузере
