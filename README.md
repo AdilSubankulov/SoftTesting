@@ -39,3 +39,18 @@
 3.  **Запуск тестов и просмотр HTML-отчета:**
    - npm run test:newman
    - Открываю файл postman-report.html в браузере
+
+## API Autotest Playwright
+
+1.**Create folder and autotest file:**
+   - /playwrightLalafo/ mkdir api-tests
+   - /playwrightLalafo/ cd api-tests
+   - /api-tests/ api.spec.js
+
+2.**Setting playwright.config.js:**
+   - изменяем путь запуска теста на ./api-tests
+   - также меняем baseURL на 'https://simple-books-api.glitch.me'
+
+3.**Writing api autotest:**
+4.**Runing api autotest:**
+   - npx playwright test api-tests/api.spec.js
