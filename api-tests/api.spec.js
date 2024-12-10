@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 const baseUrl = 'https://simple-books-api.glitch.me';
 const token = 'd88d1f914f9f4d063f8b8de8e5fe57264ba926d0f235c97882d5ae3c4500e57f';
 
+let orderNewId;
+
 test.describe('API Testing - Submit an Order', () => {
   test('Status of the API', async ({ request }) => {
     const response = await request.get(`${baseUrl}/status`);
@@ -41,10 +43,10 @@ test.describe('API Testing - Submit an Order', () => {
       },
     });
     expect(response.status()).toBe(201);
-    
+
     const order = await response.json();
-    const orderId = order.orderId;
-    
+    orderNewId = order.orderId; 
+    console.log('Order ID:', orderNewId);
   });
 
   test('401 Error - Submit an Order without Auth', async ({ request }) => {
@@ -105,8 +107,7 @@ test.describe('API Testing - Submit an Order', () => {
   });
 
   test('Update Order', async ({ request }) => {
-    const orderId = 'MLmaWgpVqDjoPNJdJJPwe';
-    const response = await request.patch(`${baseUrl}/orders/${orderId}`, {
+    const response = await request.patch(`${baseUrl}/orders/${orderNewId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -118,8 +119,7 @@ test.describe('API Testing - Submit an Order', () => {
   });
 
   test('Delete Order', async ({ request }) => {
-    const orderId = 'MLmaWgpVqDjoPNJdJJPwe';
-    const response = await request.delete(`${baseUrl}/orders/${orderId}`, {
+    const response = await request.delete(`${baseUrl}/orders/${orderNewId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
